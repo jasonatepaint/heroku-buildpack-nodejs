@@ -22,7 +22,7 @@ STDLIB_FILE=$(mktemp -t stdlib.XXXXX)
 
 #if [ -f $PROJECT_PATH ]; then
 #  echo "PROJECT_PATH is defined"
-printenv | grep PROJECT_PATH
+PROJECT_PATH="jobs"
 BUILD_DIR=$BUILD_DIR/$PROJECT_PATH
 #fi
 echo "BUILD PATH:" $BUILD_DIR
