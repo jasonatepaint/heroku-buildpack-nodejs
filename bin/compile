@@ -20,15 +20,13 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 STDLIB_FILE=$(mktemp -t stdlib.XXXXX)
 
-echo 'ENV DIR:'$ENV_DIR
-if [ -f $ENV_DIR/PROJECT_PATH ]; then
-  echo "PROJECT_PATH is defined"
-  PROJECT_PATH=`cat $ENV_DIR/PROJECT_PATH`  
+#if [ -f $PROJECT_PATH ]; then
+#  echo "PROJECT_PATH is defined"
   BUILD_DIR=$BUILD_DIR/$PROJECT_PATH
-fi
+#fi
 echo "BUILD PATH:" $BUILD_DIR
-### Load dependencies
 
+### Load dependencies
 curl --silent --retry 5 --retry-max-time 15 'https://lang-common.s3.amazonaws.com/buildpack-stdlib/v7/stdlib.sh' > "$STDLIB_FILE"
 source "$STDLIB_FILE"
 source $BP_DIR/lib/output.sh
