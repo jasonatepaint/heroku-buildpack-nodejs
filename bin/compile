@@ -6,7 +6,7 @@
 set -o errexit    # always exit on error
 set -o pipefail   # don't ignore exit codes when piping output
 unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
-
+set -x
 ### Constants
 
 DEFAULT_CACHE="node_modules bower_components"
@@ -20,13 +20,13 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 STDLIB_FILE=$(mktemp -t stdlib.XXXXX)
 
-echo $ENV_DIR
+echo 'ENV DIR:'$ENV_DIR
 if [ -f $ENV_DIR/PROJECT_PATH ]; then
   echo "PROJECT_PATH is defined"
   PROJECT_PATH=`cat $ENV_DIR/PROJECT_PATH`  
   BUILD_DIR=$BUILD_DIR/$PROJECT_PATH
 fi
-
+echo "BUILD PATH:" $BUILD_DIR
 ### Load dependencies
 
 curl --silent --retry 5 --retry-max-time 15 'https://lang-common.s3.amazonaws.com/buildpack-stdlib/v7/stdlib.sh' > "$STDLIB_FILE"
