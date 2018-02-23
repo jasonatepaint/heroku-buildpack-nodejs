@@ -20,11 +20,7 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 STDLIB_FILE=$(mktemp -t stdlib.XXXXX)
 
-#if [ -f $PROJECT_PATH ]; then
-#  echo "PROJECT_PATH is defined"
-PROJECT_PATH="jobs"
-BUILD_DIR=$BUILD_DIR/$PROJECT_PATH
-#fi
+BUILD_DIR=$BUILD_DIR/${PROJECT_PATH}
 echo "BUILD PATH:" $BUILD_DIR
 
 ### Load dependencies
